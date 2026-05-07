@@ -1,0 +1,279 @@
+@import url("https://files.gpsaswimming.com/gpsa-roster.css");
+@import url("https://files.gpsaswimming.com/gpsa-roster-contact.css");
+@import url("https://files.gpsaswimming.com/gpsa-roster-officials.css");
+
+#wrapper #header {
+    position: relative;
+    padding: 0px;
+    max-height: 229px !important;
+    height: 229px !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background: url(https://d1nmxxg9d5tdo.cloudfront.net/875/snippet_images/c7c4e879162f40d30c2dc819e57220e2029e4623/original/gpsa-logo-header-lettering.png) !important;
+}
+
+#wrapper #header .hgroup h1,
+#wrapper #header .hgroup h2 {
+    visibility: hidden;
+}
+
+#wrapper #navigation {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+#wrapper .sm-menu {
+    background: #e00024;
+}
+
+.bio_snippet {
+    border-bottom: 1px solid #eee;
+}
+
+#snippet_326897 {
+    text-align: center;
+}
+
+@media all and (max-width: 960px) {
+    #wrapper #header {
+        display: none;
+    }
+
+    #wrapper .sm-menu #sm-navigation:before {
+        background: #0884c7
+    }
+
+    .bio_image_block {
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+
+@media all and (min-width: 980px) {
+
+    #snippet_326897 {
+        display: none
+    }
+}
+
+#snippet_478479 button,
+#snippet_67303 button,
+#snippet_349588 button{
+    background-color: #e00024;
+    margin: auto;
+    padding: 10px 20px;
+    border: 0px;
+    border-radius: 5px !important;
+}
+#snippet_478479 button:hover,
+#snippet_67303 button:hover,
+#snippet_349588 button:hover {
+    background: #ee6e83;
+}
+
+#snippet_478479 button a,
+#snippet_67303 button a,
+#snippet_349588 button a {
+    color: #fff !important;
+    font-weight: bold;
+    text-decoration: none !important;
+}
+
+#snippet_67303 .button-container {
+    text-align: center;
+}
+
+/*swim clinic styling*/
+
+#snippet_329685 {
+    text-align: center;
+}
+
+#snippet_329521 {
+    background-color: #e00024 !important;
+}
+
+#snippet_329521 {
+    border-radius: 0px !important;
+}
+
+#snippet_329521 .snippet_main {
+    border: 2px solid #fff !important;
+    padding: 5px;
+    outline-width: 5px;
+    outline-color: #e00024;
+}
+
+#snippet_329521 .announcement_snippet h3 {
+    color: #fff !important;
+}
+
+#snippet_329532 .bio_name_block .bio_name {
+    color: #0585c8 !important;
+    font-size: 24px !important;
+}
+
+#snippet_329532 p {
+    font-size: 20px !important;
+}
+
+#snippet_339494, #snippet_413386 {
+    text-align: center;
+    background-color: #0884c7 !important;
+    border-radius: 5px;
+    padding-bottom: 10px;
+}
+
+#snippet_339494 li a, #snippet_413386 li a {
+    font-size: 16px;
+    color: #fff !important;
+    font-weight: bold;
+    text-decoration: none !important;
+
+}
+
+#divisions {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+#divisions th {
+    text-align: center;
+    font-size: large;
+}
+
+#divisions td {
+    text-align: center;
+}
+
+#publicity {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#publicity th {
+    text-align: center;
+    font-size: large;
+    width: fit-content;
+}
+
+#publicity td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#publicity tr {
+    border-bottom: 1px solid black;
+}
+
+#contacts {
+    width: 100%;
+}
+
+#contacts th {
+    text-align: left;
+}
+
+#contacts td {
+    vertical-align: middle;
+}
+
+#qualifying_times {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+}
+
+#qualifying_times th {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#qualifying_times td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#qualifying_times tr:nth-child(even) {
+    background-color: #E00225;
+    color: white;
+}
+
+/* #qualifying_times tr:nth-child(odd) {
+    background-color: #7CB7DE;
+} */
+
+#team_info {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#team_info td {
+    text-align: left;
+    vertical-align: middle;
+}
+
+#meet_schedule {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#meet_schedule th {
+    text-align: center;
+    font-size: large;
+    width: fit-content;
+}
+
+#meet_schedule td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#meet_schedule tr {
+    border-bottom: 1px solid black;
+}
+
+.collapsible_text {
+  background-color: #dc001e;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-top
+}
+
+.collapsible_text:nth-of-type(2)
+.collapsible_text:nth-of-type(3) {
+  margin-top: 10px;
+}
+
+.collapsible_icon {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: auto; 
+}
+  
+  .active, .collapsible_text:hover {
+    background-color: #e000255c;
+  }
+  
+ .collapsible_content {
+  display: none; 
+  overflow: hidden;
+  background-color: #F1F1F1;
+  padding: 0 18px;
+}
