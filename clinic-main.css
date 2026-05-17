@@ -132,7 +132,7 @@
 .swim-clinic-pricing-box h2 {
     margin-top: 0;
     font-size: 2rem;
-    color: var(--sc-white);
+    color: var(--sc-white) !important;
     border-bottom: 4px solid var(--sc-primary-red);
     padding-bottom: 10px;
     margin-bottom: 20px;
