@@ -1,0 +1,193 @@
+/**
+ * 2025 Swim Clinic Styling
+ * Scoped to prevent CMS style conflicts
+ */
+
+/* Container & Global Variables inside it */
+.swim-clinic-container {
+    --sc-primary-blue: #4a77bd;
+    --sc-bright-red: #e11d48;
+    --sc-accent-blue: #0284c7;
+    --sc-white: #ffffff;
+    
+    background-color: var(--sc-primary-blue);
+    color: var(--sc-white);
+    max-width: 800px;
+    width: 100%;
+    padding: 40px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 20px auto;
+}
+
+/* Ensure box-sizing for all child elements */
+.swim-clinic-container *, 
+.swim-clinic-container *::before, 
+.swim-clinic-container *::after {
+    box-sizing: border-box;
+}
+
+/* Header Section */
+.swim-clinic-header h1 {
+    font-size: 3rem;
+    margin: 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--sc-white);
+}
+
+.swim-clinic-header h1 .year-highlight {
+    color: var(--sc-bright-red);
+    display: block;
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.swim-clinic-tagline {
+    background-color: var(--sc-bright-red);
+    padding: 12px 25px;
+    border-radius: 50px;
+    display: inline-block;
+    font-weight: bold;
+    margin: 20px 0;
+    font-size: 1.1rem;
+    color: var(--sc-white);
+}
+
+/* Details Grid (When / Where) */
+.swim-clinic-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 30px 0;
+    align-items: center;
+}
+
+.swim-clinic-details-box h2 {
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 5px;
+    display: inline-block;
+    color: var(--sc-white);
+}
+
+.swim-clinic-details-box p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 5px 0;
+}
+
+.swim-clinic-details-box a {
+    color: var(--sc-white);
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* Pricing Section */
+.swim-clinic-pricing-box {
+    background-color: var(--sc-accent-blue);
+    padding: 20px;
+    border-radius: 30px;
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+.swim-clinic-pricing-box h2 {
+    margin-top: 0;
+    font-size: 1.6rem;
+    color: var(--sc-white);
+}
+
+.swim-clinic-pricing-box p {
+    font-size: 1.1rem;
+    margin: 8px 0;
+}
+
+/* Schedule Section */
+.swim-clinic-schedule-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    color: var(--sc-white);
+}
+
+.swim-clinic-check-in-alert {
+    background-color: var(--sc-white);
+    color: var(--sc-bright-red);
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+.swim-clinic-schedule-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    text-align: left;
+}
+
+.swim-clinic-day-column h3 {
+    border-bottom: 2px solid var(--sc-white);
+    padding-bottom: 8px;
+    font-size: 1.4rem;
+    text-align: center;
+    margin-top: 0;
+    color: var(--sc-white);
+}
+
+.swim-clinic-session-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.swim-clinic-session-list li {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.swim-clinic-session-number {
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* Footer / Scholarship Badge */
+.swim-clinic-notice-badge {
+    background-color: var(--sc-bright-red);
+    color: var(--sc-white);
+    padding: 15px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 40px;
+    font-weight: bold;
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+    .swim-clinic-details-grid, 
+    .swim-clinic-schedule-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .swim-clinic-day-column h3 {
+        margin-top: 20px;
+    }
+
+    .swim-clinic-header h1 { 
+        font-size: 2.2rem; 
+    }
+    
+    .swim-clinic-header h1 .year-highlight { 
+        font-size: 2.8rem; 
+    }
+}
