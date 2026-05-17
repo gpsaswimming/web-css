@@ -265,3 +265,76 @@
     .swim-clinic-header h1 .year-highlight { font-size: 3.2rem; }
     .swim-clinic-schedule-grid { gap: 40px; }
 }
+
+/* ---------------------------------------------------
+   Registration Alert Snippet (#snippet_668840)
+--------------------------------------------------- */
+
+/* Container Box */
+#snippet_668840 .faux_padding {
+    background: linear-gradient(135deg, #0085C8, #006AA0); /* Matches the modern secondary blue */
+    border-radius: 16px;
+    padding: 40px 20px;
+    max-width: 850px;
+    margin: 20px auto 40px auto;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 133, 200, 0.25);
+    box-sizing: border-box;
+}
+
+/* "Team registration is open!" Heading */
+#snippet_668840 .snippet_top h2 {
+    color: #ffffff !important;
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 auto 25px auto;
+    border-bottom: 4px solid #E00024; /* Primary red accent line */
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+/* "Register now" Button */
+#snippet_668840 .snippet_main a.button.default {
+    background-color: #E00024 !important; /* Primary red */
+    color: #ffffff !important;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 16px 40px;
+    border-radius: 50px;
+    display: inline-block;
+    text-decoration: none !important;
+    box-shadow: 0 8px 20px rgba(224, 0, 36, 0.3); /* Soft shadow for depth */
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+}
+
+/* Button Hover Animation */
+#snippet_668840 .snippet_main a.button.default:hover {
+    background-color: #c4001f !important; /* Slightly darker red on hover */
+    transform: translateY(-3px); /* Makes the button "lift" when hovered */
+    box-shadow: 0 12px 25px rgba(224, 0, 36, 0.4);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    #snippet_668840 .faux_padding {
+        padding: 30px 15px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    
+    #snippet_668840 .snippet_top h2 {
+        font-size: 1.8rem;
+    }
+    
+    #snippet_668840 .snippet_main a.button.default {
+        font-size: 1.1rem;
+        padding: 14px 30px;
+        width: 100%; /* Makes button full width on small phones */
+        box-sizing: border-box;
+    }
+}
