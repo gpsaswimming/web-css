@@ -1,29 +1,32 @@
 /**
- * Swim Clinic Styling
- * Scoped to prevent CMS style conflicts
+ * 2026 Swim Clinic - Modern CMS Styling
+ * League Primary: #E00024 (Red)
+ * League Secondary: #0085C8 (Blue)
  */
 
-/* Container & Global Variables inside it */
+/* Container & Global Variables */
 .swim-clinic-container {
-    --sc-primary-blue: #4a77bd;
-    --sc-bright-red: #e11d48;
-    --sc-accent-blue: #0284c7;
-    --sc-white: #ffffff;
+    --sc-primary-red: #E00024;
+    --sc-secondary-blue: #0085C8;
+    --sc-text-dark: #1F2937; /* Dark gray for high readability */
+    --sc-text-light: #4B5563; /* Medium gray for supporting text */
+    --sc-bg-light: #F9FAFB;
+    --sc-white: #FFFFFF;
     
-    background-color: var(--sc-primary-blue);
-    color: var(--sc-white);
-    max-width: 800px;
+    background-color: var(--sc-white);
+    color: var(--sc-text-dark);
+    max-width: 850px;
     width: 100%;
-    padding: 40px 20px;
-    border-radius: 12px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Modern, soft shadow */
     box-sizing: border-box;
     text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 20px auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 40px auto;
+    border-top: 8px solid var(--sc-primary-red); /* Brand accent bar */
 }
 
-/* Ensure box-sizing for all child elements */
 .swim-clinic-container *, 
 .swim-clinic-container *::before, 
 .swim-clinic-container *::after {
@@ -32,114 +35,141 @@
 
 /* Header Section */
 .swim-clinic-header h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
     margin: 10px 0;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--sc-white);
+    letter-spacing: -0.5px;
+    color: var(--sc-secondary-blue);
+    line-height: 1.1;
 }
 
 .swim-clinic-header h1 .year-highlight {
-    color: var(--sc-bright-red);
+    color: var(--sc-primary-red);
     display: block;
-    font-size: 3.5rem;
-    font-weight: bold;
+    font-size: 4rem;
+    font-weight: 900;
 }
 
 .swim-clinic-tagline {
-    background-color: var(--sc-bright-red);
-    padding: 12px 25px;
+    background-color: var(--sc-secondary-blue);
+    color: var(--sc-white);
+    padding: 10px 24px;
     border-radius: 50px;
     display: inline-block;
-    font-weight: bold;
-    margin: 20px 0;
+    font-weight: 600;
+    margin: 15px 0 30px;
     font-size: 1.1rem;
-    color: var(--sc-white);
+    box-shadow: 0 4px 12px rgba(0, 133, 200, 0.2);
 }
 
-/* Details Grid (When / Where) */
+/* Details Grid (Card UI) */
 .swim-clinic-details-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 24px;
     margin: 30px 0;
-    align-items: center;
+}
+
+.swim-clinic-details-box {
+    background-color: var(--sc-bg-light);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
 }
 
 .swim-clinic-details-box h2 {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     margin-top: 0;
-    margin-bottom: 10px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    padding-bottom: 5px;
-    display: inline-block;
-    color: var(--sc-white);
+    margin-bottom: 12px;
+    color: var(--sc-primary-red);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .swim-clinic-details-box p {
     font-size: 1.1rem;
-    line-height: 1.5;
-    margin: 5px 0;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--sc-text-light);
+}
+
+.swim-clinic-details-box strong {
+    color: var(--sc-text-dark);
 }
 
 .swim-clinic-details-box a {
-    color: var(--sc-white);
+    color: var(--sc-secondary-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.swim-clinic-details-box a:hover {
+    color: var(--sc-primary-red);
     text-decoration: underline;
-    font-weight: bold;
 }
 
 /* Pricing Section */
 .swim-clinic-pricing-box {
-    background-color: var(--sc-accent-blue);
-    padding: 20px;
-    border-radius: 30px;
-    margin: 30px auto;
-    max-width: 600px;
+    background: linear-gradient(135deg, var(--sc-secondary-blue), #006AA0);
+    color: var(--sc-white);
+    padding: 30px;
+    border-radius: 16px;
+    margin: 40px auto;
+    max-width: 650px;
+    box-shadow: 0 10px 25px rgba(0, 133, 200, 0.25);
 }
 
 .swim-clinic-pricing-box h2 {
     margin-top: 0;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: var(--sc-white);
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
 }
 
 .swim-clinic-pricing-box p {
-    font-size: 1.1rem;
-    margin: 8px 0;
+    font-size: 1.15rem;
+    margin: 12px 0;
 }
 
 /* Schedule Section */
+.swim-clinic-schedule-section {
+    margin-top: 50px;
+}
+
 .swim-clinic-schedule-section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 5px;
-    color: var(--sc-white);
+    font-size: 2rem;
+    color: var(--sc-text-dark);
+    margin-bottom: 15px;
 }
 
 .swim-clinic-check-in-alert {
-    background-color: var(--sc-white);
-    color: var(--sc-bright-red);
+    background-color: #FEF2F2;
+    color: var(--sc-primary-red);
+    border: 1px solid #FCA5A5;
     display: inline-block;
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-weight: bold;
-    margin-bottom: 30px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-bottom: 40px;
     font-size: 0.95rem;
 }
 
 .swim-clinic-schedule-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    gap: 40px;
     text-align: left;
 }
 
 .swim-clinic-day-column h3 {
-    border-bottom: 2px solid var(--sc-white);
-    padding-bottom: 8px;
+    color: var(--sc-secondary-blue);
+    border-bottom: 3px solid var(--sc-bg-light);
+    padding-bottom: 12px;
     font-size: 1.4rem;
-    text-align: center;
     margin-top: 0;
-    color: var(--sc-white);
 }
 
 .swim-clinic-session-list {
@@ -149,45 +179,66 @@
 }
 
 .swim-clinic-session-list li {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
     font-size: 1rem;
-    line-height: 1.4;
+    line-height: 1.5;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #E5E7EB;
+    color: var(--sc-text-light);
+}
+
+.swim-clinic-session-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Forces the time to drop to the next line for a cleaner look */
+.swim-clinic-session-list strong {
+    color: var(--sc-text-dark);
+    display: block; 
+    margin-top: 4px;
 }
 
 .swim-clinic-session-number {
-    font-weight: bold;
-    font-style: italic;
+    font-weight: 700;
+    color: var(--sc-secondary-blue);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-right: 5px;
 }
 
-/* Footer / Scholarship Badge */
+/* Footer Badge */
 .swim-clinic-notice-badge {
-    background-color: var(--sc-bright-red);
+    background-color: var(--sc-primary-red);
     color: var(--sc-white);
-    padding: 15px;
-    border-radius: 8px;
+    padding: 16px 32px;
+    border-radius: 12px;
     display: inline-block;
-    margin-top: 40px;
-    font-weight: bold;
-    max-width: 300px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    margin-top: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 20px rgba(224, 0, 36, 0.25);
+    transition: transform 0.2s ease;
+}
+
+.swim-clinic-notice-badge:hover {
+    transform: translateY(-2px);
 }
 
 /* Responsive Breakpoints */
 @media (max-width: 768px) {
+    .swim-clinic-container { padding: 24px; }
+    
     .swim-clinic-details-grid, 
-    .swim-clinic-schedule-grid {
-        grid-template-columns: 1fr;
+    .swim-clinic-schedule-grid { 
+        grid-template-columns: 1fr; 
+        gap: 20px; 
     }
     
-    .swim-clinic-day-column h3 {
-        margin-top: 20px;
-    }
-
-    .swim-clinic-header h1 { 
-        font-size: 2.2rem; 
-    }
-    
-    .swim-clinic-header h1 .year-highlight { 
-        font-size: 2.8rem; 
-    }
+    .swim-clinic-header h1 { font-size: 2.2rem; }
+    .swim-clinic-header h1 .year-highlight { font-size: 3.2rem; }
+    .swim-clinic-schedule-grid { gap: 40px; }
 }
