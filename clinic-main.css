@@ -147,28 +147,32 @@
 }
 
 /* Schedule Section */
+/* Schedule Section Container */
 .swim-clinic-schedule-section {
     margin-top: 50px;
 }
 
 .swim-clinic-schedule-section h2 {
-    font-size: 2rem;
-    color: var(--sc-text-dark);
+    font-size: 1.8rem;
+    color: var(--sc-primary-red); /* Matches the red in the mockup */
     margin-bottom: 15px;
+    font-weight: 700;
 }
 
+/* Pink Check-in Alert */
 .swim-clinic-check-in-alert {
     background-color: #FEF2F2;
     color: var(--sc-primary-red);
     border: 1px solid #FCA5A5;
     display: inline-block;
-    padding: 10px 24px;
+    padding: 8px 24px;
     border-radius: 50px;
     font-weight: 600;
     margin-bottom: 40px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
+/* Grid Layout */
 .swim-clinic-schedule-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -176,14 +180,19 @@
     text-align: left;
 }
 
+/* Day Headers (Saturday/Sunday) */
 .swim-clinic-day-column h3 {
-    color: var(--sc-secondary-blue);
-    border-bottom: 3px solid var(--sc-bg-light);
-    padding-bottom: 12px;
-    font-size: 1.4rem;
+    color: var(--sc-primary-red); /* Updated to Red */
+    border-bottom: none; /* Removed the underline */
+    padding-bottom: 0;
+    font-size: 1.3rem;
+    text-align: left;
     margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
+/* Session List Styling */
 .swim-clinic-session-list {
     list-style: none;
     padding: 0;
@@ -192,11 +201,11 @@
 
 .swim-clinic-session-list li {
     margin-bottom: 16px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.5;
     padding-bottom: 16px;
-    border-bottom: 1px solid #E5E7EB;
-    color: var(--sc-text-light);
+    border-bottom: 1px solid #E5E7EB; /* The light gray divider line */
+    color: var(--sc-text-light); /* Dark gray for the stroke text */
 }
 
 .swim-clinic-session-list li:last-child {
@@ -205,21 +214,23 @@
     padding-bottom: 0;
 }
 
-/* Forces the time to drop to the next line for a cleaner look */
-.swim-clinic-session-list strong {
-    color: var(--sc-text-dark);
-    display: block; 
-    margin-top: 4px;
-}
-
+/* "SESSION 1:" Blue Badge Text */
 .swim-clinic-session-number {
     font-weight: 700;
     color: var(--sc-secondary-blue);
     text-transform: uppercase;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     letter-spacing: 0.5px;
     display: inline-block;
     margin-right: 5px;
+}
+
+/* Pushes the Time to the next line and makes it bold/dark */
+.swim-clinic-session-list strong {
+    color: var(--sc-text-dark);
+    display: block; 
+    margin-top: 4px;
+    font-size: 0.95rem;
 }
 
 /* Footer Badge */
