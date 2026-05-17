@@ -34,6 +34,15 @@
 }
 
 /* Header Section */
+.swim-clinic-memorial-name {
+    color: var(--sc-primary-red);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 -10px 0; /* Pulls the main H1 up slightly so they group nicely */
+    font-weight: 700;
+}
+
 .swim-clinic-header h1 {
     font-size: 2.8rem;
     margin: 10px 0;
