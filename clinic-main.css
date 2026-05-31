@@ -267,11 +267,12 @@
 }
 
 /* ---------------------------------------------------
-   Registration Alert Snippet (#snippet_668840)
+   Registration Alert Snippet (#snippet_668840 and snippet_674871)
 --------------------------------------------------- */
 
 /* Container Box */
-#snippet_668840 .faux_padding {
+#snippet_668840 .faux_padding,
+#snippet_674871 .faux_padding {
     background: linear-gradient(135deg, #0085C8, #006AA0);
     border-radius: 16px;
     padding: 40px 20px;
@@ -286,7 +287,8 @@
 }
 
 /* "Team registration is open!" Heading */
-#snippet_668840 .snippet_top h2 {
+#snippet_668840 .snippet_top h2,
+#snippet_674871 .snippet_top h2 {
     color: #ffffff !important;
     font-size: 2.2rem;
     font-weight: 700;
@@ -300,7 +302,8 @@
 }
 
 /* "Register now" Button */
-#snippet_668840 .snippet_main a.button.default {
+#snippet_668840 .snippet_main a.button.default,
+#snippet_674871 .snippet_main a.button.default {
     background-color: #E00024 !important;
     color: #ffffff !important;
     font-size: 1.2rem;
@@ -317,7 +320,8 @@
     margin: 0 auto;
 }
 
-#snippet_668840 .snippet_main a.button.default:hover {
+#snippet_668840 .snippet_main a.button.default:hover,
+#snippet_674871 .snippet_main a.button.default:hover {
     background-color: #c4001f !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3) !important;
