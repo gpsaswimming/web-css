@@ -112,7 +112,6 @@ a { color: var(--blue); }
 }
 .hero-sub {
   margin: 0;
-  max-width: 52ch;
   color: #c4cfea;
   font-size: 1.02rem;
 }
