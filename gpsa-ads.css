@@ -168,6 +168,11 @@ a { color: var(--blue); }
   text-transform: uppercase;
   color: #ffd7d9;
 }
+/* display:inline-flex above outranks the UA [hidden] rule — without this, an unset
+   deadline still paints its ::before dot with no text beside it. */
+.hero-deadline[hidden] {
+  display: none;
+}
 .hero-deadline::before {
   content: "";
   width: 7px;
