@@ -7,6 +7,7 @@ Shared stylesheet CDN for Greater Peninsula Swimming Association, served at `css
 | File | Purpose |
 |------|---------|
 | `gpsa-tools-common.css` | Shared styles for all GPSA web tools — headers, buttons, toasts, modals, brand colors |
+| `gpsa-results.css` | Invitational meet results renderer (`results.gpsaswimming.org`) — hero, ribbon board, event tables, swimmer sheet, print |
 | `gpsa-main.css` | Main site styles — imports roster, contacts, and officials stylesheets |
 | `gpsa-roster.css` | Roster table styles for SwimTopia HTML exports |
 | `gpsa-roster-contact.css` | Contact table styles for SwimTopia HTML exports |

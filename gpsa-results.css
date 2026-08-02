@@ -1,0 +1,428 @@
+/**
+ * GPSA Invitational Results
+ * Renderer styles for the meet results pages at results.gpsaswimming.org
+ * (City Meet, Summer Splash, Mini Meet). Built by
+ * web-results/scripts/build_invitational.mjs from invitational_template/.
+ *
+ * Token names follow the house set used by gpsa-award.css and gpsa-ads.css
+ * (--navy/--blue/--red/--bg/--card/--line/--text/--muted/--radius/--shadow),
+ * plus the results-specific additions below.
+ *
+ * The eight ribbon colors are GPSA's own award colors, 1st-8th. They carry
+ * meaning on this page - place, and the points that came from it - so they
+ * are used as data and never as decoration.
+ */
+
+:root {
+  --navy: #002366;
+  --blue: #0033a0;
+  --red: #d9242b;
+  --red-dark: #b81e24;
+
+  --bg: #e9edf6;
+  --card: #ffffff;
+  --line: #d9e0ee;
+  --text: #111a30;
+  --muted: #59627a;
+
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(16, 26, 48, .06), 0 12px 30px -14px rgba(16, 26, 48, .22);
+  --maxw: 1180px;
+
+  /* results-specific */
+  --drop: #087f5b;        /* faster than seed */
+  --drop-bg: #e6f4ef;
+  --gold: #c8971d;        /* City Meet cut badge */
+  --gold-ink: #3d2f00;
+  --sunk: #f4f6fa;
+
+  /* GPSA place ribbons, 1st-8th. 9th and beyond earn no award and stay plain. */
+  --pl1: #1857b0;  /* blue   */
+  --pl2: #cf2e2e;  /* red    */
+  --pl3: #ffffff;  /* white  */
+  --pl4: #e8b800;  /* yellow */
+  --pl5: #7d1f3d;  /* maroon */
+  --pl6: #1f8a4c;  /* green  */
+  --pl7: #6a3aa0;  /* purple */
+  --pl8: #1a1a1a;  /* black  */
+  --pl3-edge: #c7cfdb;
+  --pl3-ink: var(--text);
+  --pl4-ink: #3d3000;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.num { font-variant-numeric: tabular-nums lining-nums; }
+.vh {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ---- sticky control bar --------------------------------------------------- */
+.bar {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.bar-in {
+  max-width: var(--maxw); margin: 0 auto; padding: .55rem 1rem;
+  display: flex; gap: .55rem; align-items: center; flex-wrap: wrap;
+}
+.bar-title { font-weight: 700; color: var(--navy); font-size: .95rem; margin-right: auto; }
+.bar-title span { color: var(--muted); font-weight: 500; }
+
+.ctrl { display: flex; align-items: center; gap: .4rem; }
+input[type=search], select {
+  font: inherit; font-size: .9rem; color: var(--text);
+  border: 1px solid var(--line); border-radius: 9px;
+  padding: .4rem .6rem; background: #fff; min-height: 38px;
+}
+input[type=search] { width: min(46vw, 220px); }
+input[type=search]:focus-visible, select:focus-visible {
+  outline: 2px solid var(--blue); outline-offset: 1px; border-color: var(--blue);
+}
+
+.toggle { display: inline-flex; align-items: center; gap: .4rem; font-size: .9rem; cursor: pointer; user-select: none; }
+.toggle input { width: 18px; height: 18px; accent-color: var(--navy); }
+
+/* ---- hero ----------------------------------------------------------------- */
+.hero { background: var(--navy); color: #fff; }
+.hero-in { max-width: var(--maxw); margin: 0 auto; padding: 1.9rem 1rem 1.4rem; }
+.eyebrow {
+  text-transform: uppercase; letter-spacing: .16em;
+  font-size: .72rem; font-weight: 700; color: #9dbcff;
+}
+.hero h1 {
+  font-size: clamp(1.6rem, 4.5vw, 2.5rem); font-weight: 800;
+  letter-spacing: -.025em; line-height: 1.1; margin: .25rem 0;
+  text-wrap: balance;
+}
+.hero .date { color: #c4d5fb; font-size: .95rem; }
+
+/* Unscored meets (Summer Splash, Mini Meet) keep the summary tiles. */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(115px, 1fr)); gap: .6rem; margin-top: 1.3rem; }
+.stat { background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .14); border-radius: 12px; padding: .8rem .9rem; }
+.stat.hl { background: var(--drop); border-color: transparent; }
+.stat.gold { background: var(--gold); border-color: transparent; color: var(--gold-ink); }
+.stat .n { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 800; letter-spacing: -.02em; }
+.stat .l { font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; color: #c4d5fb; }
+.stat.hl .l { color: #d8f3e9; }
+.stat.gold .l { color: var(--gold-ink); opacity: .8; }
+
+/* Scored meets (City Meet) lead with the champion instead. */
+.champ {
+  display: grid; grid-template-columns: 1fr auto; gap: 1rem 1.8rem;
+  align-items: end; margin-top: 1.4rem; padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, .16);
+}
+.champ-label {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .16em; color: #9dbcff;
+}
+.champ-name {
+  font-size: clamp(1.5rem, 5vw, 2.4rem); font-weight: 800;
+  letter-spacing: -.03em; line-height: 1.05; margin: .3rem 0 0;
+  text-wrap: balance;
+}
+.champ-sub { color: #c4d5fb; font-size: .88rem; margin-top: .45rem; }
+.champ-sub b { color: #fff; font-weight: 700; }
+.champ-pts { text-align: right; line-height: 1; }
+.champ-pts .n { font-size: clamp(2.4rem, 8vw, 3.6rem); font-weight: 800; letter-spacing: -.04em; }
+.champ-pts .l {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .16em; color: #9dbcff; margin-top: .25rem;
+}
+
+/* lane-line accent under the hero */
+.lane {
+  height: 6px;
+  background: repeating-linear-gradient(90deg,
+    var(--red) 0 22px, #fff 22px 30px, var(--navy) 30px 52px, #fff 52px 60px);
+}
+
+/* ---- page body ------------------------------------------------------------ */
+main { max-width: var(--maxw); margin: 0 auto; padding: 1.2rem 1rem 4rem; }
+
+details.panel {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 1rem;
+}
+details.panel > summary {
+  cursor: pointer; list-style: none; padding: .9rem 1.1rem;
+  font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: .5rem;
+}
+details.panel > summary::-webkit-details-marker { display: none; }
+details.panel > summary::after { content: '\25B8'; margin-left: auto; color: var(--muted); transition: transform .15s; }
+details.panel[open] > summary::after { transform: rotate(90deg); }
+details.panel > summary:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.panel-body { padding: 0 1.1rem 1.1rem; }
+
+/* ---- the ribbon board (scored meets) -------------------------------------- */
+/* Bar length is the score. Bar composition is the ribbons that earned it. */
+.board { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 1rem; overflow: hidden; }
+.board-key {
+  display: flex; align-items: center; gap: .9rem; flex-wrap: wrap;
+  padding: .75rem 1.1rem; background: var(--sunk);
+  border-bottom: 1px solid var(--line); font-size: .75rem; color: var(--muted);
+}
+.key-scale { display: flex; align-items: center; gap: 3px; }
+.chip {
+  width: 17px; height: 17px; border-radius: 4px; flex: none;
+  display: grid; place-items: center; font-size: .58rem; font-weight: 700; color: #fff;
+}
+.chip.p1 { background: var(--pl1); } .chip.p2 { background: var(--pl2); }
+.chip.p3 { background: var(--pl3); color: var(--pl3-ink); box-shadow: inset 0 0 0 1px var(--pl3-edge); }
+.chip.p4 { background: var(--pl4); color: var(--pl4-ink); }
+.chip.p5 { background: var(--pl5); } .chip.p6 { background: var(--pl6); }
+.chip.p7 { background: var(--pl7); } .chip.p8 { background: var(--pl8); }
+
+.board-row { border-bottom: 1px solid var(--line); }
+.board-row:last-child { border-bottom: 0; }
+.board-row > summary {
+  list-style: none; cursor: pointer;
+  display: grid; grid-template-columns: 1.7rem minmax(110px, 1.1fr) 3fr auto;
+  align-items: center; gap: .85rem; padding: .5rem 1.1rem;
+}
+.board-row > summary::-webkit-details-marker { display: none; }
+.board-row > summary:hover { background: var(--sunk); }
+.board-row > summary:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.board-rank { font-size: .82rem; font-weight: 700; color: var(--muted); text-align: right; }
+.board-team { font-weight: 600; font-size: .93rem; }
+.board-pts { font-weight: 800; font-size: 1rem; min-width: 3.4em; text-align: right; }
+.board-row.first .board-team, .board-row.first .board-pts { color: var(--blue); }
+
+/* City Meet medals the top six teams. That line is the difference between a medal and
+   nothing - in 2026 it fell between 144 and 143 points - so the board draws it.
+   Distinct from the event ribbons, which go to 8th. */
+.board-cut {
+  display: flex; align-items: center; gap: .7rem;
+  padding: 0 1.1rem; margin: .1rem 0;
+  font-size: .68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--muted);
+}
+.board-cut::before, .board-cut::after { content: ''; height: 1px; background: var(--line); flex: 1; }
+.board-cut span { flex: none; }
+.board-row.medals .board-rank { color: var(--navy); }
+
+/* Filtering to a team highlights its row in place rather than hiding the other 17 -
+   a placing only reads against the teams either side of it. */
+.board-row.focus > summary { background: #e7eefb; box-shadow: inset 3px 0 0 var(--navy); }
+.board-row.focus > summary:hover { background: #dfe8f8; }
+.board-row.focus .board-team { font-weight: 700; }
+
+.board-bar { display: flex; height: 18px; border-radius: 4px; overflow: hidden; width: var(--w); }
+.board-seg { height: 100%; min-width: 0; }
+.board-seg.p1 { background: var(--pl1); } .board-seg.p2 { background: var(--pl2); }
+.board-seg.p3 { background: var(--pl3); box-shadow: inset 0 0 0 1px var(--pl3-edge); }
+.board-seg.p4 { background: var(--pl4); } .board-seg.p5 { background: var(--pl5); }
+.board-seg.p6 { background: var(--pl6); } .board-seg.p7 { background: var(--pl7); }
+.board-seg.p8 { background: var(--pl8); }
+
+.board-detail {
+  padding: .1rem 1.1rem .8rem calc(1.7rem + .85rem + 1.1rem);
+  display: flex; flex-wrap: wrap; gap: .4rem; font-size: .78rem;
+}
+.fact {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: var(--sunk); border: 1px solid var(--line);
+  border-radius: 999px; padding: .15rem .6rem .15rem .2rem; color: var(--muted);
+}
+.fact b { color: var(--text); font-weight: 700; }
+.fact.plain { padding-left: .6rem; }
+
+/* medal table (unscored meets) */
+.medals { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.medals th, .medals td { padding: .45rem .5rem; text-align: right; border-bottom: 1px solid var(--line); }
+.medals th:first-child, .medals td:first-child,
+.medals th:nth-child(2), .medals td:nth-child(2) { text-align: left; }
+.medals thead th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.medals tbody tr { cursor: pointer; }
+.medals tbody tr:hover { background: var(--sunk); }
+.medals tbody tr:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.medals td.tot { font-weight: 700; }
+.rank { color: var(--muted); width: 1.6rem; }
+
+/* jump-to-event grid */
+.jump { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: .35rem; }
+.jump a {
+  font-size: .82rem; color: var(--text); text-decoration: none;
+  padding: .35rem .5rem; border-radius: 8px; border: 1px solid var(--line);
+}
+.jump a:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+.jump a:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.jump a b { color: var(--navy); }
+.jump a:hover b { color: #fff; }
+
+/* ---- event cards ---------------------------------------------------------- */
+.event {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); margin-bottom: .9rem; overflow: hidden;
+  scroll-margin-top: var(--stick, 72px);
+}
+.hidden { display: none !important; }
+.ev-head { padding: .7rem 1.1rem; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+.ev-num { font-weight: 800; color: var(--red); font-size: .8rem; }
+.ev-title { font-weight: 700; font-size: 1rem; }
+.ev-tag { margin-left: auto; font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+
+.tbl-wrap { overflow-x: auto; }
+/* Fixed layout + shared column widths so every event card's columns line up down the
+   page (auto-layout would size each table's columns to its own data and drift). */
+table.res { width: 100%; border-collapse: collapse; font-size: .9rem; table-layout: fixed; }
+.c-pl { width: 42px; } .c-team { width: 62px; } .c-seed { width: 76px; }
+.c-time { width: 76px; } .c-pm { width: 74px; } .c-pts { width: 46px; } .c-cm { width: 44px; }
+table.res th, table.res td { padding: .45rem .6rem; text-align: left; white-space: nowrap; }
+table.res thead th { font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-bottom: 1px solid var(--line); }
+table.res tbody tr + tr td { border-top: 1px solid #eef1f7; }
+table.res td.r, table.res th.r { text-align: right; }
+table.res td.c, table.res th.c { text-align: center; }
+/* The name column is capped and a trailing spacer column absorbs the slack, so on a
+   wide screen the eye doesn't cross a 600px void between a swimmer and their time.
+   The cap is generous because relay rows list four leg names in this cell. */
+table.res .name { white-space: normal; }
+.c-name { width: 22rem; }
+.c-flex { width: auto; }
+
+.pl {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 26px; height: 26px; border-radius: 50%;
+  font-weight: 700; font-size: .82rem; background: #eef1f7; color: var(--text);
+}
+.pl.p1 { background: var(--pl1); color: #fff; }
+.pl.p2 { background: var(--pl2); color: #fff; }
+.pl.p3 { background: var(--pl3); color: var(--pl3-ink); box-shadow: inset 0 0 0 1.5px var(--pl3-edge); }
+.pl.p4 { background: var(--pl4); color: var(--pl4-ink); }
+.pl.p5 { background: var(--pl5); color: #fff; }
+.pl.p6 { background: var(--pl6); color: #fff; }
+.pl.p7 { background: var(--pl7); color: #fff; }
+.pl.p8 { background: var(--pl8); color: #fff; }
+
+.swm { background: none; border: none; font: inherit; color: var(--text); font-weight: 600; cursor: pointer; padding: 0; text-align: left; }
+.swm:hover { color: var(--blue); text-decoration: underline; }
+.swm:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 3px; }
+
+.team { display: inline-block; font-size: .72rem; font-weight: 700; color: var(--navy); background: #e7eefb; border-radius: 6px; padding: .1rem .4rem; }
+
+.relay-tag { display: inline-block; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--red); margin-right: .35rem; }
+.legs { color: var(--muted); }
+
+.drop { color: var(--drop); font-weight: 700; }
+.addt { color: var(--muted); }
+.pts { font-weight: 700; color: var(--text); }
+.cut {
+  flex-shrink: 0; display: inline-block; font-size: .66rem; font-weight: 700;
+  color: var(--gold-ink); background: var(--gold); border-radius: 6px;
+  padding: .1rem .45rem; letter-spacing: .03em; white-space: nowrap; vertical-align: middle;
+}
+.badge { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: .1rem .4rem; border-radius: 6px; }
+.badge.dq { background: #fdeaea; color: var(--red-dark); }
+.badge.sc { background: #eef1f7; color: var(--muted); }
+
+.empty { text-align: center; color: var(--muted); padding: 3rem 1rem; }
+.legend { font-size: .78rem; color: var(--muted); margin: .3rem 0 1rem; display: flex; gap: 1.1rem; flex-wrap: wrap; align-items: center; }
+.legend b { color: var(--drop); }
+.medal-key { display: inline-flex; align-items: center; gap: 3px; }
+.medal-key .chip { width: 20px; height: 20px; font-size: .62rem; }
+.medal-key .chip:last-of-type { margin-right: 5px; }
+
+/* ---- swimmer modal -------------------------------------------------------- */
+.modal { position: fixed; inset: 0; z-index: 50; display: none; align-items: flex-end; justify-content: center; background: rgba(10, 20, 45, .5); padding: 0; }
+.modal.open { display: flex; }
+.sheet { background: #fff; width: 100%; max-width: 560px; max-height: 86vh; overflow-y: auto; border-radius: 16px 16px 0 0; }
+@media (min-width: 640px) { .modal { align-items: center; padding: 1rem; } .sheet { border-radius: 16px; } }
+.sheet-head { position: sticky; top: 0; z-index: 1; background: var(--navy); color: #fff; padding: 1rem 1.2rem; display: flex; align-items: center; gap: .6rem; }
+.sheet-id { margin-right: auto; min-width: 0; }
+.sheet-head h3 { font-size: 1.1rem; font-weight: 800; }
+.sheet-head .sub { color: #c4d5fb; font-size: .82rem; }
+.sheet-link {
+  flex: none; background: rgba(255,255,255,.18); color: #fff; border: none;
+  font: inherit; font-size: .76rem; font-weight: 600;
+  padding: .35rem .7rem; border-radius: 999px; cursor: pointer; white-space: nowrap;
+}
+.sheet-link:hover { background: rgba(255,255,255,.28); }
+.sheet-close { background: rgba(255,255,255,.18); color: #fff; border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; flex: none; }
+.sheet-link:focus-visible, .sheet-close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.swim-row .relay-tag { color: #fff; background: var(--red); border-radius: 4px; padding: 0 .3rem; }
+.sheet-body { padding: .4rem 1.2rem 1.4rem; }
+.swim-row { display: grid; grid-template-columns: auto 1fr auto; gap: .3rem .7rem; align-items: baseline; padding: .6rem 0; border-bottom: 1px solid #eef1f7; }
+.swim-row:last-child { border-bottom: 0; }
+.swim-row .ev { color: var(--muted); font-size: .78rem; grid-column: 1 / -1; }
+.swim-row .time { font-weight: 700; }
+.swim-row .seed { color: var(--muted); }
+.swim-row .end { text-align: right; }
+
+footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 1.5rem 1rem; }
+footer a { color: var(--blue); }
+
+/* ---- responsive ----------------------------------------------------------- */
+@media (max-width: 720px) {
+  .champ { grid-template-columns: 1fr; align-items: start; }
+  .champ-pts { text-align: left; }
+  .board-row > summary { grid-template-columns: 1.4rem 1fr auto; gap: .35rem .6rem; padding: .55rem .8rem; }
+  .board-pts { grid-row: 1; grid-column: 3; }
+  .board-bar-cell { grid-row: 2; grid-column: 1 / -1; }
+  .board-detail { padding-left: .8rem; padding-right: .8rem; }
+  .board-key { padding-left: .8rem; padding-right: .8rem; }
+}
+@media (max-width: 560px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .bar-in { padding: .45rem .7rem; gap: .4rem; }
+  .bar-title { width: 100%; margin: 0; font-size: .88rem; }
+  input[type=search] { width: 100%; flex: 1 1 8rem; }
+  .ctrl { flex: 1 1 8rem; }
+  select { width: 100%; }
+  /* A seven-column table cannot fit a phone, and squeezing it makes the time
+     collide with the delta. Each swim becomes two lines instead:
+        [place]  Name .................... pts/CM
+        [place]  TEAM   time   +/-
+     Seed is the one column dropped - the time and the delta are what people came for. */
+  table.res { table-layout: auto; display: block; width: 100%; }
+  table.res colgroup { display: none; }
+  table.res thead { display: none; }
+  table.res tbody, table.res tr, table.res td { display: block; }
+  table.res tr {
+    display: grid;
+    grid-template-columns: 2.1rem auto auto 1fr auto;
+    grid-template-areas:
+      "pl name name name end"
+      "pl team time pm   pm";
+    align-items: center; gap: .1rem .5rem;
+    padding: .5rem .7rem;
+  }
+  table.res tbody tr + tr { border-top: 1px solid #eef1f7; }
+  table.res tbody tr + tr td { border-top: 0; }
+  table.res td { padding: 0; white-space: nowrap; }
+  /* Prefixed with table.res so these outrank the `table.res td` block above -
+     a bare `td.t-seed` loses the cascade to it and the column never hides. */
+  table.res td.t-pl { grid-area: pl; }
+  table.res td.t-name { grid-area: name; white-space: normal; }
+  table.res td.t-team { grid-area: team; }
+  table.res td.t-time { grid-area: time; text-align: left; }
+  table.res td.t-pm { grid-area: pm; text-align: left; }
+  table.res td.t-end { grid-area: end; text-align: right; }
+  table.res td.t-seed, table.res td.t-flex { display: none; }
+  .jump { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* ---- print ---------------------------------------------------------------- */
+@media print {
+  .bar, .jump, details.panel > summary::after, .modal { display: none !important; }
+  body { background: #fff; }
+  .hero { background: #fff !important; color: #000; }
+  .hero .eyebrow, .hero .date, .champ-label, .champ-sub, .champ-pts .l { color: #333 !important; }
+  .champ-sub b { color: #000; }
+  .champ { border-top-color: #ccc; }
+  .event, .board, details.panel { box-shadow: none; border-color: #ccc; break-inside: avoid; }
+  .hidden { display: none !important; }
+  a[href^="#"] { text-decoration: none; color: inherit; }
+}
