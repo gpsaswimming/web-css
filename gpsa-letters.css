@@ -140,16 +140,14 @@
 }
 
 /* ========================= SCHOLARSHIP RECIPIENTS =========================
-   A real list, marked up as a list. Kept off page breaks when printed. */
+   A real list, marked up as a list. Deliberately NOT a panel — no fill, border,
+   or inset. In a letter, boxing the recipients reads as an ad slot pulled out of
+   the text; these names should sit in the letter as the president wrote them.
+   The group labels and the row rules give it structure instead.
+   Kept off page breaks when printed. */
 .scholarships {
-  margin: 2.2em 0 0;
-  padding: 24px 22px 20px;
-  background: #f7f9ff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  max-width: none;   /* the panel spans the card; the prose inside keeps the measure */
+  margin: 2.2em 0;
 }
-.scholarships > * { max-width: var(--measure); }
 
 /* Group labels ("Women" / "Men"). These are <h2> so the document doesn't skip
    from <h1> straight to <h3> — a letter has no section headings between them.
@@ -166,7 +164,6 @@
   letter-spacing: .04em;
   text-transform: uppercase;
 }
-.scholarships > h2:first-child { margin-top: 0; }
 .scholarships h2::before {
   content: "";
   width: 22px;
@@ -290,7 +287,6 @@ a:focus-visible {
 /* ============================== RESPONSIVE ============================== */
 @media (max-width: 560px) {
   .letter { padding: 24px 18px 28px; }
-  .scholarships { padding: 20px 16px 16px; }
   .letter .lede { font-size: 1.12rem; }
 }
 
@@ -349,8 +345,7 @@ a:focus-visible {
     margin: 0 !important;
     padding: 0 !important;
   }
-  .letter,
-  .scholarships {
+  .letter {
     max-width: none !important;
     background: #fff !important;
     border: none !important;
@@ -358,10 +353,8 @@ a:focus-visible {
     border-radius: 0 !important;
     padding: 0 !important;
   }
-  .scholarships { margin-top: 18pt; }
 
-  .letter > *,
-  .scholarships > * { max-width: none; }
+  .letter > * { max-width: none; }
 
   .letter p,
   .letter li,
@@ -392,7 +385,7 @@ a:focus-visible {
     border-radius: 0;
   }
 
-  .scholarships h3::before {
+  .scholarships h2::before {
     background: #000 !important;
   }
 
