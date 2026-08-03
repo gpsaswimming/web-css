@@ -1,0 +1,419 @@
+/* GPSA President's Letters — long-form reading layer.
+ *
+ * Loads THIRD, after gpsa-tools-common.css and gpsa-award.css:
+ *
+ *   <link rel="stylesheet" href="https://css.gpsaswimming.org/gpsa-tools-common.css">
+ *   <link rel="stylesheet" href="https://css.gpsaswimming.org/gpsa-award.css">
+ *   <link rel="stylesheet" href="https://css.gpsaswimming.org/gpsa-letters.css">
+ *
+ * gpsa-award.css supplies the whole visual system — brand tokens, the navy hero,
+ * .wrap / .card / .btn, the heading scale. This file adds ONLY what a form-shaped
+ * stylesheet doesn't have: prose typography sized for reading on a phone, the
+ * scholarship recipient list, the archive index, and print rules so the PDF is
+ * generated from this page rather than maintained separately.
+ *
+ * Brand-locked: navy #002366, red #d9242b, Inter. Nothing new is invented here.
+ * Canonical source: css.gpsaswimming.org */
+
+:root {
+  /* Reading measure. ~68ch at 1.125rem Inter lands near 620px, so this
+     constrains the line length inside the inherited 760px --maxw .wrap. */
+  --measure: 68ch;
+  --prose: 1.125rem;      /* 18px */
+  --prose-lh: 1.65;
+}
+
+/* ============================== HERO EXTRAS ==============================
+   The hero itself comes from gpsa-award.css. These are the two bits a letter
+   needs that a form doesn't: a dateline and a byline. */
+.dateline {
+  margin: 0;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #7fa0ff;
+}
+.byline {
+  margin: 6px 0 0;
+  color: #c4cfea;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.byline .byline-role {
+  display: block;
+  color: #9fb2dd;
+  font-size: .88rem;
+  font-weight: 400;
+}
+
+/* ================================ ARTICLE ================================ */
+.letter {
+  padding: 34px 30px 38px;
+}
+.letter > * {
+  max-width: var(--measure);
+}
+.letter p,
+.letter li {
+  font-size: var(--prose);
+  line-height: var(--prose-lh);
+  color: var(--text);
+}
+.letter p {
+  margin: 0 0 1.15em;
+}
+.letter > p:last-child {
+  margin-bottom: 0;
+}
+
+/* "Dear GPSA Swimmers and Families," */
+.letter .salutation {
+  margin-bottom: 1em;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* Opening paragraph, slightly larger and quieter. */
+.letter .lede {
+  font-size: 1.22rem;
+  line-height: 1.55;
+  color: #2c364d;
+  margin-bottom: 1.4em;
+}
+
+/* Section headings reuse the .award-card h2 scale exactly. */
+.letter h2 {
+  margin: 2em 0 .6em;
+  color: var(--navy);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.25;
+}
+.letter h3 {
+  margin: 1.5em 0 .5em;
+  color: var(--navy);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.letter h2:first-child,
+.letter > *:first-child {
+  margin-top: 0;
+}
+
+.letter a {
+  color: var(--blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.letter a:hover { color: var(--navy); }
+
+.letter blockquote {
+  margin: 0 0 1.15em;
+  padding: 12px 15px;
+  border-left: 3px solid var(--navy);
+  border-radius: 0 8px 8px 0;
+  background: #f2f6ff;
+  color: #2c364d;
+  font-style: italic;
+}
+.letter blockquote p:last-child { margin-bottom: 0; }
+
+/* Sign-off */
+.signoff {
+  margin-top: 2em;
+  padding-top: 1.4em;
+  border-top: 1px solid var(--line);
+}
+.signoff .signoff-name {
+  display: block;
+  font-weight: 700;
+  color: var(--navy);
+}
+.signoff .signoff-role {
+  display: block;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+/* ========================= SCHOLARSHIP RECIPIENTS =========================
+   A real list, marked up as a list. Kept off page breaks when printed. */
+.scholarships {
+  margin: 2.2em 0 0;
+  padding: 24px 22px 20px;
+  background: #f7f9ff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  max-width: none;   /* the panel spans the card; the prose inside keeps the measure */
+}
+.scholarships > * { max-width: var(--measure); }
+
+/* Group labels ("Women" / "Men"). These are <h2> so the document doesn't skip
+   from <h1> straight to <h3> — a letter has no section headings between them.
+   They're styled compact rather than at the .letter h2 scale, because they
+   label a list, they don't open a section. */
+.scholarships h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 1.5em 0 .5em;
+  color: var(--navy);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.scholarships > h2:first-child { margin-top: 0; }
+.scholarships h2::before {
+  content: "";
+  width: 22px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--red);
+  flex: none;
+}
+
+.recipients {
+  list-style: none;
+  margin: 0 0 .5em;
+  padding: 0;
+}
+.recipients li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid #e4eaf7;
+}
+.recipients li:last-child { border-bottom: none; }
+
+/* Placing. The list is an <ol> because the order is meaningful, but the marker
+   is suppressed and the place spelled out so it reads as "1st" not "1.". */
+.rec-place {
+  flex: none;
+  min-width: 2.4em;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--red-dark);
+}
+.rec-name { font-weight: 600; color: var(--text); }
+.rec-team {
+  font-size: .88rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ============================= ARCHIVE INDEX ============================= */
+.letter-index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.letter-index a {
+  display: block;
+  padding: 20px 22px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .15s, transform .15s;
+}
+.letter-index a:hover {
+  border-color: var(--navy);
+  transform: translateY(-2px);
+}
+.letter-index .year {
+  display: block;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--red-dark);
+  margin-bottom: 5px;
+}
+.letter-index .title {
+  display: block;
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -.01em;
+  margin-bottom: 5px;
+}
+.letter-index .summary {
+  display: block;
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.5;
+}
+
+/* ================================ FOOTER ================================ */
+.letter-foot {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 22px 56px;
+  text-align: center;
+  color: var(--muted);
+  font-size: .9rem;
+}
+.letter-foot a {
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+.letter-foot a:hover { text-decoration: underline; }
+.letter-foot p { margin: 0 0 6px; }
+
+/* ============================ ACCESSIBILITY ============================
+   The shared sheets only style focus on form controls. Links need it too. */
+a:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.hero a:focus-visible {
+  outline-color: #fff;
+}
+
+/* Screen-only: printed-page header, revealed in the print block below. */
+.print-head { display: none; }
+
+/* ============================== RESPONSIVE ============================== */
+@media (max-width: 560px) {
+  .letter { padding: 24px 18px 28px; }
+  .scholarships { padding: 20px 16px 16px; }
+  .letter .lede { font-size: 1.12rem; }
+}
+
+/* ================================ PRINT ================================
+   The PDF is generated from this page. Drop the chrome, go black on white,
+   keep the recipient list intact across pages. */
+@media print {
+  @page {
+    margin: 0.75in;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11.5pt;
+  }
+
+  /* Chrome that has no business in a PDF. */
+  .hero,
+  .letter-foot,
+  .hero-back,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Printed header: GPSA name + year, per page is not possible in CSS alone,
+     so it leads the document. */
+  .print-head {
+    display: block !important;
+    margin: 0 0 22px;
+    padding-bottom: 10px;
+    border-bottom: 1.5pt solid #000;
+  }
+  .print-head .print-org {
+    display: block;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .print-head .print-title {
+    display: block;
+    font-size: 17pt;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .print-head .print-meta {
+    display: block;
+    font-size: 9.5pt;
+    margin-top: 5px;
+  }
+
+  /* Strip the card treatment — no fills, borders, shadows, or rounding. */
+  .wrap {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .letter,
+  .scholarships {
+    max-width: none !important;
+    background: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+  }
+  .scholarships { margin-top: 18pt; }
+
+  .letter > *,
+  .scholarships > * { max-width: none; }
+
+  .letter p,
+  .letter li,
+  .letter .lede {
+    color: #000 !important;
+    font-size: 11.5pt;
+    line-height: 1.5;
+  }
+  .letter .lede { font-size: 12.5pt; }
+
+  .letter h2,
+  .letter h3,
+  .rec-name,
+  .rec-place,
+  .letter .salutation,
+  .signoff .signoff-name {
+    color: #000 !important;
+  }
+  .letter h2 { font-size: 13.5pt; }
+  .letter h3 { font-size: 11pt; }
+  .rec-team,
+  .signoff .signoff-role { color: #333 !important; }
+
+  .letter blockquote {
+    background: none !important;
+    border-left: 2pt solid #000;
+    padding: 2pt 0 2pt 12pt;
+    border-radius: 0;
+  }
+
+  .scholarships h3::before {
+    background: #000 !important;
+  }
+
+  /* Keep the recipient list off page breaks. */
+  .scholarships,
+  .recipients,
+  .recipients li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .letter h2,
+  .letter h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  .recipients li { border-bottom: .5pt solid #bbb; }
+  .signoff { border-top: .5pt solid #000; }
+
+  /* Underlined links are noise on paper; the URL matters more than the style. */
+  .letter a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+}
