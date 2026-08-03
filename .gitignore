@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Claude Code
+.claude/
+
+# Raw meet files — these carry minors' birthdates and must never reach a public
+# repo. A stylesheet CDN has no business holding one, which is exactly why the
+# rule belongs here: the repos nobody expects to receive a meet file are the ones
+# where a misdirected write would go unnoticed.
+*.sd3
+*.SD3
+*.hy3
+*.HY3
+*.cl2
+*.CL2
+*.zip
+*.ZIP
