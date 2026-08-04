@@ -1,0 +1,464 @@
+/* GPSA Meet Results Submission — submit.gpsaswimming.org
+ *
+ * Direction: THIS IS A CERTIFICATION DOCUMENT, NOT A FORM. The rep is not being
+ * sold anything and has no choice about being here — they are attesting that a
+ * file is correct and checking what is about to be published under their team's
+ * name. So the page reads like the record it produces: one white sheet, hairline
+ * rules instead of floating cards, identifiers set in mono because they are
+ * identifiers, and the scoreline set as an official result line.
+ *
+ * That is deliberately a different register from its siblings, which are public
+ * intake: gpsa-ads.css is a scoreboard because the ad ends up on one, and
+ * gpsa-award.css is a ceremony. Nobody arrives here to be persuaded.
+ *
+ * The boldness is spent in ONE place — the scoreline. It is the thing the rep is
+ * actually checking and the thing that gets published; everything around it is
+ * quiet on purpose.
+ *
+ * Brand-locked: navy #002366, red #d9242b, Inter. Token names are kept identical
+ * to gpsa-ads.css and gpsa-award.css so the three sheets stay diffable even
+ * though they look nothing alike. Toasts and the header band come from the
+ * shared stylesheet; everything else is owned here.
+ */
+
+:root {
+  --navy: #002366;
+  --blue: #0033a0;
+  --red: #d9242b;
+  --red-dark: #b81e24;
+
+  --bg: #e9edf6;
+  --card: #ffffff;
+  --line: #d9e0ee;
+  --rule: #c3cde3;          /* heavier than --line; document rules, not borders */
+  --text: #111a30;
+  --muted: #59627a;
+  --ok: #167a43;
+  --warn: #8a5a00;
+  --warn-bg: #fdf6e7;
+  --red-bg: #fdeced;
+
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(16, 26, 48, .06), 0 12px 30px -14px rgba(16, 26, 48, .22);
+  --maxw: 1040px;
+
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 22px 18px 48px;
+}
+
+/* ── Masthead ──────────────────────────────────────────────────────────────
+   Composes with .gpsa-header from the shared sheet, which supplies the navy. */
+
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 18px 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 22px;
+}
+
+.masthead img {
+  width: 68px;
+  height: 68px;
+  flex: none;
+  border-radius: 50%;
+}
+
+.masthead h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+
+.masthead p {
+  margin: 2px 0 0;
+  font-size: .9rem;
+  color: #c8d3ea;
+}
+
+/* ── The sheet ─────────────────────────────────────────────────────────────
+   One surface for the whole review, rather than three cards of equal weight
+   competing for the same attention. Sections are separated by rules, the way a
+   document is. */
+
+.sheet {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.sheet + .sheet { margin-top: 18px; }
+
+.sheet-body { padding: 22px; }
+
+/* ── Step 1 · the docket ───────────────────────────────────────────────── */
+
+.dropzone {
+  display: block;
+  padding: 40px 20px;
+  text-align: center;
+  border: 2px dashed var(--rule);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color .15s, background-color .15s;
+}
+
+.dropzone:hover,
+.dropzone.is-dragging {
+  border-color: var(--navy);
+  background: #f3f6fc;
+}
+
+/* The input inside is visually hidden but focusable (shared sheet), so the
+   label carries the focus ring on its behalf. */
+.dropzone:focus-within {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+  border-color: var(--navy);
+}
+
+.dropzone .lede {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.dropzone .sub {
+  display: block;
+  margin-top: 4px;
+  font-size: .875rem;
+  color: var(--muted);
+}
+
+code, .identifier {
+  font-family: var(--mono);
+  font-size: .9em;
+}
+
+/* An identifier should look like one — meet keys and filenames are strings to
+   be compared character by character, not prose. */
+.identifier {
+  color: var(--muted);
+  word-break: break-all;
+}
+
+.chosen {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: .875rem;
+  color: var(--muted);
+}
+
+details.help { margin-top: 22px; font-size: .9rem; }
+details.help summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+details.help summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+details.help ul { margin: 10px 0; padding-left: 20px; }
+details.help li { margin-bottom: 4px; }
+details.help .warn-text { color: var(--red); font-weight: 700; }
+
+/* ── Step 2 · the record and the working column ────────────────────────── */
+
+.review {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .review { grid-template-columns: minmax(280px, 2fr) 3fr; }
+  /* The record is REFERENCE and stays put while the decisions scroll. */
+  .review .record { border-right: 1px solid var(--line); border-bottom: 0; }
+}
+
+.record {
+  padding: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.working { padding: 22px; }
+
+.kicker {
+  margin: 0 0 14px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.record dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  margin: 0 0 18px;
+  font-size: .9rem;
+}
+
+.record dt { font-weight: 600; color: var(--muted); }
+.record dd { margin: 0; }
+.record dd .source { color: var(--muted); }
+
+/* ── SIGNATURE · the scoreline ─────────────────────────────────────────────
+   The one loud element on the page. This is what the rep came to check and what
+   gets published, so it is set like an official result line: rules above and
+   below, names in caps, points in large tabular figures so the digits align
+   between rows the way they would on a printed sheet. */
+
+.scoreline {
+  border-top: 2px solid var(--navy);
+  border-bottom: 1px solid var(--rule);
+  margin: 0;
+}
+
+.scoreline .row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+.scoreline .row + .row { border-top: 1px solid var(--line); }
+
+.scoreline .team {
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.scoreline .points {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+/* The winner is stated, not merely implied by the larger number — a rep
+   scanning this at speed should not have to compare two figures. */
+.scoreline .row.is-winner .team { color: var(--navy); }
+.scoreline .row.is-winner .points { color: var(--navy); }
+
+.note {
+  margin: 12px 0 0;
+  font-size: .875rem;
+  color: var(--muted);
+}
+
+/* ── Findings ──────────────────────────────────────────────────────────── */
+
+.findings { display: grid; gap: 12px; }
+
+.finding {
+  border-left: 4px solid var(--rule);
+  background: #f6f8fc;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 14px;
+}
+
+.finding h3 { margin: 0; font-size: .95rem; font-weight: 700; }
+.finding p { margin: 4px 0 0; font-size: .875rem; color: #2c364d; }
+
+.finding--refuse { border-left-color: var(--red); background: var(--red-bg); }
+.finding--ask { border-left-color: #d99000; background: var(--warn-bg); }
+
+.finding ol, .finding ul { margin: 8px 0 0; padding-left: 20px; font-size: .875rem; }
+.finding li { margin-bottom: 3px; }
+.finding ul { list-style: none; padding-left: 0; }
+.finding ul li { border-left: 2px solid var(--rule); padding-left: 10px; }
+
+/* ── Fields ────────────────────────────────────────────────────────────── */
+
+.section + .section { margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--line); }
+
+.section h2 {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.field { margin-bottom: 16px; }
+.field:last-child { margin-bottom: 0; }
+
+.field > label { display: block; font-size: .875rem; font-weight: 600; margin-bottom: 5px; }
+
+.field input[type="email"],
+.field select {
+  width: 100%;
+  padding: 9px 11px;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+
+.field input[type="email"]:focus-visible,
+.field select:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+  border-color: var(--navy);
+}
+
+.hint { margin: 6px 0 0; font-size: .8rem; color: var(--muted); }
+
+/* ── The attestation ───────────────────────────────────────────────────────
+   The ONE thing the system cannot verify and the rulebook requires, and the only
+   checkbox on the page — a second one restating something already checked would
+   train people to click past this one. It gets the red rule for that reason and
+   for no other. */
+
+.attest {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  background: var(--red-bg);
+  border-left: 4px solid var(--red);
+  border-radius: 0 8px 8px 0;
+  font-size: .9rem;
+  cursor: pointer;
+}
+
+.attest input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  accent-color: var(--red);
+}
+
+.attest input:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* ── Buttons ───────────────────────────────────────────────────────────────
+   Overrides the shared sheet's `.btn` on purpose, and loads after it. Both
+   sibling property sheets do exactly this (`gpsa-award.css`, `gpsa-ads.css`,
+   each with `--` modifiers), so it is the established pattern rather than a
+   collision — the shared `.btn` is a floor for tools that add nothing. */
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font: inherit;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+
+.btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+.btn--primary { background: var(--navy); color: #fff; }
+.btn--primary:hover:not(:disabled) { background: var(--blue); }
+
+.btn--ghost { background: #fff; color: var(--text); border-color: var(--rule); }
+.btn--ghost:hover { background: #f3f6fc; }
+
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.actions { margin-top: 18px; }
+
+/* Why the button is disabled, in the interface's voice. Never an apology, and
+   specific about what is missing. */
+.blocker { margin: 10px 0 0; font-size: .875rem; color: var(--muted); }
+
+.restart { margin-top: 18px; text-align: center; }
+
+/* ── Busy, receipt, toast ──────────────────────────────────────────────── */
+
+.busy { padding: 60px 20px; text-align: center; }
+.busy p { margin: 0; font-weight: 600; color: var(--navy); }
+.busy .sub { margin-top: 4px; font-weight: 400; font-size: .875rem; color: var(--muted); }
+
+/* In the record column the scoreline is followed by a .note, which brings its
+   own spacing. On the receipt it is followed by a boxed message, which would
+   otherwise sit flush against the closing rule. */
+.receipt .scoreline { margin-bottom: 16px; }
+
+.receipt h2 { margin: 0 0 14px; font-size: 1.25rem; font-weight: 800; color: var(--navy); }
+.receipt h2.is-bad { color: var(--red); }
+.receipt p { margin: 0 0 10px; }
+.receipt a { color: var(--blue); word-break: break-all; }
+
+.receipt .problem {
+  padding: 12px 14px;
+  background: var(--red-bg);
+  border-left: 4px solid var(--red);
+  border-radius: 0 8px 8px 0;
+}
+
+.receipt .partial {
+  padding: 12px 14px;
+  background: var(--warn-bg);
+  border-left: 4px solid #d99000;
+  border-radius: 0 8px 8px 0;
+}
+
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  max-width: min(560px, calc(100vw - 32px));
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: #fff;
+  background: var(--navy);
+  box-shadow: 0 8px 24px rgba(16, 26, 48, .28);
+  z-index: 9999;
+}
+
+#toast.is-error { background: var(--red); }
+
+.footer {
+  margin-top: 26px;
+  text-align: center;
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+/* ── Utilities ─────────────────────────────────────────────────────────── */
+
+[hidden] { display: none !important; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
