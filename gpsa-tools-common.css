@@ -277,8 +277,41 @@ body {
     transition: background-color 0.3s;
 }
 
+/* Hide the native file input WITHOUT removing it from the page.
+ *
+ * This rule used to be `display: none`, which also takes the input out of the
+ * tab order — so on every GPSA tool with a custom dropzone, the one control that
+ * starts the whole flow could not be reached by keyboard at all. The tools were
+ * not doing anything wrong; the shared stylesheet was removing the control and
+ * leaving them to proxy it with a click handler, which only a mouse can fire.
+ *
+ * The clip-rect pattern below looks identical — the input is still invisible and
+ * still takes no space — but it stays focusable, so `<label for>` and keyboard
+ * activation work the way the browser already intended. No markup change is
+ * needed in any consumer for the input to become reachable.
+ */
 input[type="file"] {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* An invisible input cannot show its own focus ring, so the label that wraps it
+ * shows one instead. Any tool that wraps its dropzone in a <label> gets a
+ * visible keyboard focus indicator from this with no markup change.
+ *
+ * A tool whose dropzone is still a <div> with a click handler gets nothing here,
+ * because there is nothing to focus — that markup has to become a label first.
+ */
+label:has(input[type="file"]:focus-visible) {
+    outline: 3px solid #0033a0;
+    outline-offset: 2px;
 }
 
 /* ===========================
